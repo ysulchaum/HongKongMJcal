@@ -3,16 +3,13 @@ package edu.cuhk.csci3310;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowInsetsController;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,14 +41,24 @@ public class MainActivity extends AppCompatActivity {
     private TextView firm; // firm/yes button
     private TextInputEditText addPlayerNameEditText;
     int numberOfPlayersAdded = 0; // for checking no. of players
+    // what happen
     int currentPlayer = 0; // for identify current player(playerList)
-    HongKongMahjong game = new HongKongMahjong();
+    HKMJ game = new HKMJ();
 
+    // for player
     int[] playerList = {
             R.id.eastPlayer, //1
             R.id.southPlayer, //2
             R.id.westPlayer, //3
             R.id.northPlayer, //4
+    };
+
+    // for name
+    int[] nameTag = {
+            R.id.eastPlayerName, //1
+            R.id.southPlayerName, //2
+            R.id.westPlayerName, //3
+            R.id.northPlayerName, //4
     };
 
 
@@ -70,64 +77,92 @@ public class MainActivity extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (view, windowInsets) -> {
             // Get system bar insets (status bar + navigation bar)
             Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-
             // Apply top inset for status bar and bottom inset for navigation bar
             view.setPadding(0, insets.top, 0, insets.bottom);
-
             // Return the insets so child views can use them if needed
             return windowInsets;
         });
 
+        //testing();
 
-        // add player name 1st
-        if(numberOfPlayersAdded < 4){
-            popUpLayout6 = findViewById(R.id.popUpAddPlayerStart);
-            for (int playerId : playerList) {
-                ImageButton playerButton = findViewById(playerId);
-                playerButton.setOnClickListener(v -> {
-                    togglePopUpVisibility(popUpLayout6);
-                    currentPlayer = playerId; // update current player who press the panel button
-                });
-            }
 
-            firm = findViewById(R.id.firm);
-            addPlayerNameEditText = findViewById(R.id.addPlayerName);
-            firm.setOnClickListener(v -> {
-                // Get the name from the TextInputEditText
-                String playerName = addPlayerNameEditText.getText().toString();
-
-                // Check if the name is not empty
-                if (playerName.isEmpty()) {
-                    // Display a reminder for empty name
-                    Toast.makeText(this, "Please enter a player name", Toast.LENGTH_SHORT).show();
-                } else if (playerName.length() > maxNameLength) {
-                    // Display a reminder for too long name
-                    Toast.makeText(this, "Player name is too long (max " + maxNameLength + " characters)", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Add the name to the list
-                    playerNames.add(playerName);
-
-                    // Clear the TextInputEditText
-                    addPlayerNameEditText.getText().clear();
-
-                    // You can now do something with the playerNames list, e.g., log it
-                    System.out.println("Player Names: " + playerNames);
-
-                    togglePopUpVisibility(popUpLayout6); // Close the popup
-                }
-            });
+        if (numberOfPlayersAdded < 3){
+            setupPrePlayerAdditionUI();
+        }else {
+            setupPostPlayerAdditionUI();
         }
 
 
+    }
 
+    private void setupPrePlayerAdditionUI() {
+        // add player name 1st
+        popUpLayout6 = findViewById(R.id.popUpAddPlayerStart);
+        for (int playerId : playerList) {
+            ImageButton playerButton = findViewById(playerId);
+            playerButton.setOnClickListener(v -> {
+                togglePopUpVisibility(popUpLayout6);
+                currentPlayer = playerId; // update current player who press the panel button
+            });
+        }
+
+        firm = findViewById(R.id.firm);
+        addPlayerNameEditText = findViewById(R.id.addPlayerName);
+        firm.setOnClickListener(v -> {
+            // Get the name from the TextInputEditText
+            String playerName = addPlayerNameEditText.getText().toString();
+
+            // Check if the name is not empty
+            if (playerName.isEmpty()) {
+                // Display a reminder for empty name
+                Toast.makeText(this, "Please enter a player name", Toast.LENGTH_SHORT).show();
+            } else if (playerName.length() > maxNameLength) {
+                // Display a reminder for too long name
+                Toast.makeText(this, "Player name is too long (max " + maxNameLength + " characters)", Toast.LENGTH_SHORT).show();
+            } else {
+                // Clear the TextInputEditText
+                addPlayerNameEditText.getText().clear();
+
+                // Add the player to the game
+                HKMJ.Seat playerSeat = RIdToSeat(currentPlayer);
+                // player name
+                game.addPlayer(game.new Player(playerName), playerSeat);
+
+                // add name to the playerNames list for the drop down bar
+                playerNames.add(playerName);
+
+                // Update the player name tag
+                TextView playerNameTag = findViewById(SeatToNameTagRId(playerSeat));
+                playerNameTag.setText(playerName);
+
+                togglePopUpVisibility(popUpLayout6); // Close the popup
+
+                // for check the no. player
+                numberOfPlayersAdded++;
+
+                // Disable the button after adding the player
+                ImageButton myImageButton = findViewById(currentPlayer);
+                myImageButton.setEnabled(false);
+
+                if (numberOfPlayersAdded == 4) {
+                    setupPostPlayerAdditionUI(); // Activate game UI
+                }
+            }
+        });
+    }
+    private void setupPostPlayerAdditionUI() {
+        // enable the popup menu buttons
+        for(int playerId : playerList){
+            ImageButton playerButton = findViewById(playerId);
+            playerButton.setEnabled(true);
+        }
         // scroll faan, player
-
         LinearLayout numberListContainer = findViewById(R.id.numberListContainer);
         addNumbersToScrollView(numberListContainer, 1, 10);
 
+        // for the playerNames drop down bar
         LinearLayout container = findViewById(R.id.numberListContainer2);
-        List<String> names = Arrays.asList("Sam", "Tom", "Victor", "Alice", "Bob");
-        addNameSpinnerToContainer(container, names);
+        addNameSpinnerToContainer(container, playerNames);
 
 
         // popup eat panel
@@ -140,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        //setupButton(R.id.startNewGame,popUpLayout2);
         // popup new game panel
         popUpLayout2 = findViewById(R.id.popUpStartNewGame);
         ImageButton startNewGameButton = findViewById(R.id.startNewGame);
@@ -176,10 +212,8 @@ public class MainActivity extends AppCompatActivity {
         yes = findViewById(R.id.yes);
         yes.setOnClickListener(v -> {
             // 冧莊
-            if((currentPlayer == R.id.eastPlayer && game.currentDealer == HongKongMahjong.Seat.EAST)||
-                    (currentPlayer == R.id.southPlayer && game.currentDealer == HongKongMahjong.Seat.SOUTH)||
-                    (currentPlayer == R.id.westPlayer && game.currentDealer == HongKongMahjong.Seat.WEST)||
-                    (currentPlayer == R.id.northPlayer && game.currentDealer == HongKongMahjong.Seat.NORTH)) {
+            HKMJ.Seat playerSeat = RIdToSeat(currentPlayer);
+            if (playerSeat == game.currentDealer) {
                 game.handleConsecutiveWin(true);
             }
             // no 冧莊
@@ -189,15 +223,38 @@ public class MainActivity extends AppCompatActivity {
             }
             togglePopUpVisibility(popUpLayout1); // close the popup
         });
-
-
-
     }
 
+    private void testing(){
+        game.addPlayer(game.new Player("Player1"), HKMJ.Seat.EAST);
+        game.addPlayer(game.new Player("Player2"), HKMJ.Seat.SOUTH);
+        game.addPlayer(game.new Player("Player3"), HKMJ.Seat.WEST);
+        game.addPlayer(game.new Player("Player4"), HKMJ.Seat.NORTH);
+    }
 
-
-
-    private int getDealerIndicatorId(HongKongMahjong.Seat seat) {
+    private HKMJ.Seat RIdToSeat(int playerId) {
+        if (playerId == R.id.eastPlayer) {
+            return HKMJ.Seat.EAST;
+        } else if (playerId == R.id.southPlayer) {
+            return HKMJ.Seat.SOUTH;
+        } else if (playerId == R.id.westPlayer) {
+            return HKMJ.Seat.WEST;
+        } else if (playerId == R.id.northPlayer) {
+            return HKMJ.Seat.NORTH;
+        } else {
+            throw new IllegalArgumentException("Invalid player ID: " + playerId);
+        }
+    }
+    private int SeatToNameTagRId(HKMJ.Seat seat) {
+        switch (seat) {
+            case EAST: return R.id.eastPlayerName;
+            case SOUTH: return R.id.southPlayerName;
+            case WEST: return R.id.westPlayerName;
+            case NORTH: return R.id.northPlayerName;
+            default: return -1;
+        }
+    }
+    private int getDealerIndicatorId(HKMJ.Seat seat) {
         switch (seat) {
             case EAST: return R.id.eastDealer;
             case SOUTH: return R.id.southDealer;
@@ -206,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
             default: return -1;
         }
     }
-
     private void updateDealerIndicators(int currentPlayer){
         int[] dealerList = {
                 R.id.eastDealer, //1
@@ -308,10 +364,10 @@ public class MainActivity extends AppCompatActivity {
     // press other area to discard the popup window
     public boolean dispatchTouchEvent(MotionEvent ev) {
         // Array of all closeable pop-up views
-        View[] popUpViews = {popUpLayout1, popUpLayout2, popUpLayout3, popUpLayout4, popUpLayout5};
+        View[] popUpViews = {popUpLayout1, popUpLayout2, popUpLayout3, popUpLayout4, popUpLayout5, popUpLayout6};
 
         for (View popUp : popUpViews) {
-            if (popUp.getVisibility() == View.VISIBLE) {
+            if (popUp != null && popUp.getVisibility() == View.VISIBLE) {
                 Rect viewRect = new Rect();
                 popUp.getGlobalVisibleRect(viewRect);
 
@@ -324,9 +380,17 @@ public class MainActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(ev);
     }
 
+    private void setupButton(int id, View popupLayout) {
+        ImageButton btn = findViewById(id);
+        if (btn != null) {
+            btn.setOnClickListener(v -> {
+                togglePopUpVisibility((LinearLayout) popupLayout);
+                currentPlayer = id;
+            });
+        }
+    }
+
 
     // game logic
 
 }
-
-

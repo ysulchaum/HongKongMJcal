@@ -316,11 +316,39 @@
                 android:layout_width="120dp"
                 android:layout_height="130dp"
                 android:layout_margin="5dp"
-                android:scaleType="centerCrop"
-                android:padding="0dp"
                 android:background="@null"
+                android:padding="0dp"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/player_profile" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+
+                <TextView
+                    android:id="@+id/northPlayerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/northPlayerScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="40dp"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"/>
+
+            </LinearLayout>
 
 
             <!-- red square -->
@@ -365,6 +393,34 @@
                 android:background="@null"
                 app:srcCompat="@drawable/player_profile" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+
+                <TextView
+                    android:id="@+id/westPlayerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/westPlayerScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="40dp"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"/>
+
+            </LinearLayout>
             <!-- red square -->
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/westDealer"
@@ -404,6 +460,35 @@
                 android:background="@null"
                 app:srcCompat="@drawable/player_profile" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+
+                <TextView
+                    android:id="@+id/eastPlayerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/eastPlayerScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="center"
+                    android:textSize="40dp"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"/>
+
+            </LinearLayout>
 
             <!-- red square -->
             <com.google.android.material.imageview.ShapeableImageView
@@ -447,6 +532,33 @@
                 android:background="@null"
                 app:srcCompat="@drawable/player_profile" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/southPlayerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/southPlayerScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="40dp"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"/>
+
+            </LinearLayout>
             <!-- red square -->
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/southDealer"
@@ -733,7 +845,7 @@
         app:layout_constraintStart_toStartOf="@+id/middleMiddle"
         app:layout_constraintTop_toTopOf="@+id/middleMiddle"
         android:visibility="gone"
-        tools:visibility="visible"
+        tools:visibility="gone"
         android:orientation="vertical"
         android:background="#FFFFFF">
 
@@ -786,7 +898,7 @@
         app:layout_constraintStart_toStartOf="@+id/middleMiddle"
         app:layout_constraintTop_toTopOf="@+id/middleMiddle"
         android:visibility="gone"
-        tools:visibility="visible"
+        tools:visibility="gone"
         android:orientation="vertical"
         android:background="#FFFFFF">
 
