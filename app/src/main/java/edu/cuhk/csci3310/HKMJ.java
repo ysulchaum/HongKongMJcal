@@ -3,12 +3,14 @@ package edu.cuhk.csci3310;
 
 // 導入所需的Java工具類
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 // 主遊戲類：香港麻將遊戲
 public class HKMJ {
+    private static HKMJ instance;  // 单例实例
 
     // 座位枚舉，定義四個遊戲座位方向
     enum Seat {
@@ -59,6 +61,12 @@ public class HKMJ {
         seatMap.put(Seat.NORTH, null);  // 北位初始化為空
 
         consecutiveWins = 0;  // 初始化連莊次數為0
+    }
+    public static HKMJ getInstance() { //确保游戏数据通过单例持久化
+        if (instance == null) {
+            instance = new HKMJ();
+        }
+        return instance;
     }
 
     // 添加玩家到玩家池
@@ -115,13 +123,167 @@ public class HKMJ {
             //rotateSeats();        // 輪轉座位
         }
     }
+    // 新增方法：通过玩家名称获取座位
+    public Seat getSeatByPlayerName(String playerName) {
+        for (Map.Entry<Seat, Player> entry : seatMap.entrySet()) {
+            Player player = entry.getValue();
+            if (player != null && player.getName().equals(playerName)) {
+                return entry.getKey();
+            }
+        }
+        return null; // 未找到返回null
+    }
+
+    // Method to get the player's name by their seat
+    public String getPlayerNameBySeat(Seat seat) {
+        Player player = seatMap.get(seat); // Get the player assigned to the specified seat
+        if (player != null) {
+            return player.getName(); // Return the player's name
+        }
+        throw new IllegalArgumentException("No player found at the specified seat.");
+    }
+
+
+    // Method to add score by player name
+    // Method to add score by seat
+    public boolean addScoreBySeat(Seat seat, int points) {
+        Player player = seatMap.get(seat); // Get the player assigned to the specified seat
+        if (player != null) {
+            player.addScore(points); // Add points to the player's score
+            return true; // Operation successful
+        }
+        return false; // No player found in the specified seat
+    }
+
+    // Method to get the score of a player by their seat
+    public int getScoreBySeat(Seat seat) {
+        Player player = seatMap.get(seat); // Get the player assigned to the specified seat
+        if (player != null) {
+            return player.getScore(); // Return the player's score
+        }
+        throw new IllegalArgumentException("No player found at the specified seat.");
+    }
+
+
+
 //
 //    // 開始新一局遊戲
 //    public void startNewGame(boolean isDealerWin) {
 //        handleConsecutiveWin(isDealerWin);  // 處理連莊狀態
 //        System.out.println("新一局開始，莊家: " + getCurrentDealer().getName());
 //    }
+// 新增枚举：赢的类型
+    enum WinType {
+        SELF_DRAW,   // 自摸
+        EAT_PLAYER,   // 吃胡
+        //PLAYER_LOSE,   // 出統
+    }
+        // 新增回合记录类
+        class Round {
+            private String winner;
+            private WinType winType;
+            private List<String> losers;
+            private Map<String, Integer> scoreChanges;
+            private Seat dealerSeat;
 
+            public Round(String winner, WinType winType, List<String> losers, Map<String, Integer> scoreChanges) {
+                this.winner = winner;
+                this.winType = winType;
+                this.losers = new ArrayList<>(losers);
+                this.scoreChanges = new HashMap<>(scoreChanges);
+                this.dealerSeat = currentDealer;
+            }
+
+            // Getter方法
+            public String getWinner() { return winner; }
+            public WinType getWinType() { return winType; }
+            public List<String> getLosers() { return new ArrayList<>(losers); }
+            public Map<String, Integer> getScoreChanges() { return new HashMap<>(scoreChanges); }
+
+            // 新增方法：判断是否是出銃局
+//            public boolean isPlayerLoseRound() {
+//                return winType == WinType.PLAYER_LOSE;
+//            }
+        }
+
+        // 新增游戏记录管理类
+        class GameRecord {
+            private List<Round> rounds = new ArrayList<>();
+
+            public void addRound(Round round) {
+                rounds.add(round);
+            }
+
+            // for update to the last total score and pop the newest round
+            public Round pop() {
+                if (rounds.isEmpty()) return null;
+
+                // 获取最后一个回合记录
+                Round lastRound = rounds.get(rounds.size() - 1);
+
+                // 逆向计算分数
+                Map<String, Integer> scoreChanges = lastRound.getScoreChanges();
+                for (Map.Entry<String, Integer> entry : scoreChanges.entrySet()) {
+                    String playerName = entry.getKey();
+                    int points = entry.getValue();
+
+                    // 获取玩家座位
+                    Seat seat = getSeatByPlayerName(playerName);
+                    if (seat != null) {
+                        // 逆向操作：减去原来的分数变化量
+                        addScoreBySeat(seat, -points);
+                    }
+                }
+                currentDealer = lastRound.dealerSeat;
+
+                // 移除并返回最后一个回合
+                return rounds.remove(rounds.size() - 1);
+            }
+
+            public int getLoseCount(String playerName) {
+                return (int) rounds.stream()
+                        .filter(r -> r.getWinType() == WinType.EAT_PLAYER)  // Filter for EAT_PLAYER rounds
+                        .filter(r -> r.getLosers().contains(playerName))    // Check if player is a loser
+                        .count();
+            }
+
+            // 保持其他方法不变
+            public int getSelfDrawCount(String playerName) {
+                return (int) rounds.stream()
+                        .filter(r -> r.getWinner().equals(playerName))
+                        .filter(r -> r.getWinType() == WinType.SELF_DRAW)
+                        .count();
+            }
+
+            public int getEatPlayerCount(String playerName) {
+                return (int) rounds.stream()
+                        .filter(r -> r.getWinner().equals(playerName))
+                        .filter(r -> r.getWinType() == WinType.EAT_PLAYER)
+                        .count();
+            }
+
+            public List<Round> getAllRounds() {
+                return new ArrayList<>(rounds);
+            }
+        }
+
+        // 在HKMJ类中添加以下字段
+        private GameRecord gameRecord = new GameRecord();
+
+        // 添加新方法用于记录回合
+        public void recordRound(String winner, WinType winType, List<String> losers, Map<String, Integer> scoreChanges) {
+            gameRecord.addRound(new Round(winner, winType, losers, scoreChanges));
+        }
+
+        // 添加访问游戏记录的方法
+        public GameRecord getGameRecord() {
+            return gameRecord;
+        }
+
+        public Round popGameRecord() {
+            // 移除并返回最后一个回合
+            return gameRecord.pop();
+        }
     // 主方法（測試用）
     public static void main(String[] args) {
         HKMJ game = new HKMJ();  // 創建遊戲實例
@@ -135,5 +297,16 @@ public class HKMJ {
 
         // 模擬遊戲流程
         game.replacePlayer(Seat.EAST, "Player5");  // 替換東位玩家
+
+        Map<String, Integer> scoreChanges = new HashMap<>();
+        scoreChanges.put("Player1", 6);
+        scoreChanges.put("Player2", -2);
+        scoreChanges.put("Player3", -2);
+        scoreChanges.put("Player4", -2);
+        game.recordRound("Player1", WinType.SELF_DRAW,
+                Arrays.asList("Player2", "Player3","player4"), scoreChanges);
+
+        // 查询统计数据
+        int selfDraws = game.getGameRecord().getSelfDrawCount("Player1");
     }
 } // 類定義結束

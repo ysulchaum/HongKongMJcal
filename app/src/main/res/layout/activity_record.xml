@@ -90,6 +90,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -97,6 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="Eat" />
 
                     <TextView
@@ -105,6 +107,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
                         android:text="10" />
 
 
@@ -113,6 +118,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -120,14 +126,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Self" />
+                        android:layout_gravity="center"
+                        android:text="Self draw" />
 
                     <TextView
                         android:id="@+id/eastPlayerSelfNum"
                         android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="10" />
 
                 </LinearLayout>
@@ -135,6 +145,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -142,39 +153,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Out" />
+                        android:layout_gravity="center"
+                        android:text="Deal in" />
 
                     <TextView
-                        android:id="@+id/eastPlayerOutNum"
+                        android:id="@+id/eastPlayerDealInNum"
                         android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="10" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Get" />
-
-                    <TextView
-                        android:id="@+id/eastPlayerGetNum"
-                        android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="10" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -194,6 +188,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -201,6 +196,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="Eat" />
 
                     <TextView
@@ -209,6 +205,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
                         android:text="10" />
 
 
@@ -217,6 +216,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -224,14 +224,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Self" />
+                        android:layout_gravity="center"
+                        android:text="Self draw" />
 
                     <TextView
                         android:id="@+id/southPlayerSelfNum"
                         android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="10" />
 
                 </LinearLayout>
@@ -239,6 +243,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -246,39 +251,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Out" />
+                        android:layout_gravity="center"
+                        android:text="Deal in" />
 
                     <TextView
-                        android:id="@+id/southPlayerOutNum"
+                        android:id="@+id/southPlayerDealInNum"
                         android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="10" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Get" />
-
-                    <TextView
-                        android:id="@+id/southPlayerGetNum"
-                        android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="10" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -297,6 +285,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -304,6 +293,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="Eat" />
 
                     <TextView
@@ -312,6 +302,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
                         android:text="10" />
 
 
@@ -320,6 +313,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -327,14 +321,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Self" />
+                        android:layout_gravity="center"
+                        android:text="Self draw" />
 
                     <TextView
                         android:id="@+id/westPlayerSelfNum"
                         android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="10" />
 
                 </LinearLayout>
@@ -342,6 +340,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -349,39 +348,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Out" />
+                        android:layout_gravity="center"
+                        android:text="Deal in" />
 
                     <TextView
-                        android:id="@+id/westPlayerOutNum"
+                        android:id="@+id/westPlayerDealInNum"
                         android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="10" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Get" />
-
-                    <TextView
-                        android:id="@+id/westPlayerGetNum"
-                        android:layout_margin="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="10" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -400,21 +382,26 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
+                        android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="Eat" />
 
                     <TextView
                         android:id="@+id/northPlayerEatNum"
+                        android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:layout_weight="1"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
                         android:text="10" />
 
 
@@ -423,21 +410,26 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
+                        android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:text="Self" />
+                        android:layout_gravity="center"
+                        android:text="Self draw" />
 
                     <TextView
                         android:id="@+id/northPlayerSelfNum"
+                        android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="10" />
 
                 </LinearLayout>
@@ -445,48 +437,36 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
 
                     <TextView
+                        android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:text="Out" />
+                        android:layout_gravity="center"
+                        android:text="Deal in" />
 
                     <TextView
-                        android:id="@+id/northPlayerOutNum"
+                        android:id="@+id/northPlayerDealInNum"
+                        android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:text="10" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:text="Get" />
-
-                    <TextView
-                        android:id="@+id/northPlayerGetNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:text="10" />
-
-                </LinearLayout>
 
             </LinearLayout>
+
+
+
+
 
         </LinearLayout>
 
