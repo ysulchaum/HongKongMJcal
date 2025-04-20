@@ -27,16 +27,12 @@ HongKongMJcal is an Android application designed to streamline the Hong Kong Mah
 
 ## Screenshots
 
-Below are placeholders for screenshots of the app. Replace these with actual images from the app.
 ![螢幕擷取畫面 2025-04-20 141232](https://github.com/user-attachments/assets/96bbe513-a772-4d72-95bd-43f483667d37)
 
-*Main screen showing player seats, scores, and game controls.*
 ![螢幕擷取畫面 2025-04-20 141409](https://github.com/user-attachments/assets/1ae201ea-9838-40ef-8c36-727e9fd42d27)
 
-*Tile selection interface for entering a winning hand.*
 ![螢幕擷取畫面 2025-04-20 141300](https://github.com/user-attachments/assets/6493b303-34c5-4c86-ac4b-482a72a5cdb3)
 
-*Record screen displaying game rounds and player statistics.*
 
 ## Installation
 
