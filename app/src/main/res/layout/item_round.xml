@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:background="@drawable/player_profile">
+
+    <!-- Left section with text -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/round_winner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Winner: "
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/round_win_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Win Type: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/roundSit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Round: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/round_score_changes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score Changes: "
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Right section with image -->
+    <ImageView
+        android:id="@+id/sitImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/special3"
+        android:layout_gravity="end" />
+
+</LinearLayout>
